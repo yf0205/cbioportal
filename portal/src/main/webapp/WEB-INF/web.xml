@@ -15,7 +15,7 @@
         <mime-type>text/xml</mime-type>
     </mime-mapping>
     <welcome-file-list>
-        <welcome-file>index.do</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <display-name>Cancer Genomics Portal</display-name>
 
@@ -121,11 +121,11 @@
         <filter-class>org.mskcc.cbio.portal.util.SessionServiceFilter</filter-class>
     </filter>
 
-    <filter-mapping>
-        <filter-name>SessionServiceFilter</filter-name>
-        <url-pattern>/index.do</url-pattern>
-        <url-pattern>/cross_cancer.do</url-pattern>
-    </filter-mapping>
+    <!--<filter-mapping>-->
+        <!--<filter-name>SessionServiceFilter</filter-name>-->
+        <!--<url-pattern>/index.do</url-pattern>-->
+        <!--<url-pattern>/cross_cancer.do</url-pattern>-->
+    <!--</filter-mapping>-->
 
     <!-- make sure XssFilter runs last, so that any new parameters added
          (for example in SessionServiceFilter) are also cleaned -->
@@ -204,19 +204,19 @@
         <url-pattern>/proxy/*</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>query_builder</servlet-name>
-        <servlet-class>org.mskcc.cbio.portal.servlet.QueryBuilder</servlet-class>
-        <init-param>
-            <param-name>pathway_commons_url</param-name>
-            <param-value>${pathway_commons.url}</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>query_builder</servlet-name>
-        <url-pattern>/index.do</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>query_builder</servlet-name>-->
+        <!--<servlet-class>org.mskcc.cbio.portal.servlet.QueryBuilder</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>pathway_commons_url</param-name>-->
+            <!--<param-value>${pathway_commons.url}</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>query_builder</servlet-name>-->
+        <!--<url-pattern>/index.do</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <servlet>
         <servlet-name>webservice</servlet-name>
@@ -227,14 +227,14 @@
         <url-pattern>/webservice.do</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>cross_cancer_query</servlet-name>
-        <servlet-class>org.mskcc.cbio.portal.servlet.CrossCancerStudyServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>cross_cancer_query</servlet-name>
-        <url-pattern>/cross_cancer.do</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>cross_cancer_query</servlet-name>-->
+        <!--<servlet-class>org.mskcc.cbio.portal.servlet.CrossCancerStudyServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>cross_cancer_query</servlet-name>-->
+        <!--<url-pattern>/cross_cancer.do</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <servlet>
         <servlet-name>portal_meta_data_json</servlet-name>
@@ -254,6 +254,7 @@
 		<url-pattern>/portalMetadata.json</url-pattern>
 	</servlet-mapping>
 
+    <!-- need to keep this for legacy network page -->
     <servlet>
         <servlet-name>network</servlet-name>
         <servlet-class>org.mskcc.cbio.portal.servlet.NetworkServlet</servlet-class>
@@ -433,10 +434,7 @@
         <servlet-name>patient_view</servlet-name>
         <url-pattern>/case.do</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>patient_view</servlet-name>
-        <url-pattern>/patient</url-pattern>
-    </servlet-mapping>
+
     <servlet>
         <servlet-name>CrossCancerJSON</servlet-name>
         <servlet-class>org.mskcc.cbio.portal.servlet.CrossCancerJSON</servlet-class>
@@ -648,7 +646,21 @@
         <url-pattern>/ln</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>SinglePageApplication</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
+    <!--mapping-->
+    <servlet-mapping>
+        <servlet-name>SinglePageApplication</servlet-name>
+        <url-pattern>/results/*</url-pattern>
+        <url-pattern>/s/*</url-pattern>
+        <url-pattern>/patient/*</url-pattern>
+        <url-pattern>/newstudy/*</url-pattern>
+        <url-pattern>/mutation_mapper/*</url-pattern>
+        <url-pattern>/index.do/*</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>SiteMapIndex</servlet-name>
         <jsp-file>/sitemap_index.jsp</jsp-file>
@@ -685,7 +697,10 @@
         <servlet-name>SiteConfiguration</servlet-name>
         <url-pattern>/config_service.json</url-pattern>
     </servlet-mapping>
-    
-    
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/index.jsp</location>
+    </error-page>
 
 </web-app>

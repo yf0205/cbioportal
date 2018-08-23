@@ -107,7 +107,7 @@
                 <artifactItem>
                   <groupId>com.github.cbioportal</groupId>
                   <artifactId>cbioportal-frontend</artifactId>
-                  <version>v1.16.0</version>
+                  <version>3f93f2bf75f46e1839fc5ff10bc2d00f006f9578</version>
                   <type>jar</type>
                   <outputDirectory>.</outputDirectory>
                   <excludes>*index*</excludes>
@@ -118,7 +118,7 @@
           </execution>
         </executions>
       </plugin>
-      <!-- war plugin config -->
+      <!-- war plugin config  -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
