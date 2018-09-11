@@ -1,10 +1,14 @@
+<%@ page import="org.mskcc.cbio.portal.servlet.QueryBuilder" %>
+<%@ page import="org.mskcc.cbio.portal.util.SessionServiceRequestWrapper" %>
+<%@ page import="org.mskcc.cbio.portal.util.GlobalProperties" %>
+
 <%
     String url = request.getRequestURL().toString();
     String baseUrl = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath();
     baseUrl = baseUrl.replace("https://", "").replace("http://", "");
 %>
 
-<%@ page import="org.mskcc.cbio.portal.util.GlobalProperties" %>
+
 <!DOCTYPE html>
 <html class="cbioportal-frontend">
 <head>
