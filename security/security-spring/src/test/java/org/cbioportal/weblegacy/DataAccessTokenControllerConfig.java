@@ -30,29 +30,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package org.cbioportal.service;
+package org.cbioportal.weblegacy;
 
-import java.util.*;
-import org.cbioportal.model.DataAccessToken;
+import org.cbioportal.service.DataAccessTokenService;
+import org.mockito.Mockito;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-public interface DataAccessTokenService {
+@Configuration
+@ComponentScan(basePackages = {"org.cbioportal.weblegacy"}, resourcePattern = "**/*DataAccessTokenController.class")
+public class DataAccessTokenControllerConfig {
 
-    public DataAccessToken createDataAccessToken(String username, boolean allowRevocationOfOtherTokens);
-    public List<DataAccessToken> getAllDataAccessTokens(String username);
-    public DataAccessToken getDataAccessToken(String username);
-    public DataAccessToken getDataAccessTokenInfo(String token);
-    public void revokeAllDataAccessTokens(String username);
-    public void revokeDataAccessToken(String token);
-    public String getUsername(String token);
-    public Date getExpiration(String token);
-
-    /** tests token validity
-     *
-     *  token is valid if:
-     *      - not yet expired and
-     *      - not revoked and 
-     *      - can be verfied as issued through this service (maybe via signature)
-     */
-    public Boolean isValid(String token);
-
+    @Bean
+    public DataAccessTokenService tokenService() {
+        return Mockito.mock(DataAccessTokenService.class);
+    }
+    
+    @Bean
+    public DataAccessTokenController dataAccessTokenController() {
+        return new DataAccessTokenController();
+    }
+    
 }
